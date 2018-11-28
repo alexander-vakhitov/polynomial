@@ -20,7 +20,7 @@
 
 #include <Polynomial/PolynomialInternal.hpp>
 
-namespace polynomial
+namespace Polynomial
 {
     /**
      * Polynomial
@@ -37,29 +37,29 @@ namespace polynomial
      * Note that the static and dynamic versions should not be mixed, i.e. do not add a dynamic polynomial to a static one.
      */
     template<int deg>
-    class Polynomial
+    class Polynomialc
     {
         Eigen::Matrix<double,deg+1,1> coef;
     public:
-        Polynomial()
+        Polynomialc()
         : coef( Eigen::Matrix<double,1,deg+1>::Zero() )
         {
             
         }
         
-        Polynomial( const Eigen::Matrix<double,deg+1,1> &coefin )
+        Polynomialc( const Eigen::Matrix<double,deg+1,1> &coefin )
         : coef( coefin )
         {
 
         }
         
-        Polynomial( const Polynomial<deg> &polyin )
+        Polynomialc( const Polynomialc<deg> &polyin )
         : coef( polyin.coef )
         {
 
         }
         
-        Polynomial( const double *coefin )
+        Polynomialc( const double *coefin )
         : coef( Internal::vecmap<deg+1>( coefin ) )
         {
             
@@ -76,34 +76,34 @@ namespace polynomial
         }
 
         template<int degin>
-        Polynomial<Internal::max<degin,deg>::value> operator+(const Polynomial<degin> &poly) const
+        Polynomialc<Internal::max<degin,deg>::value> operator+(const Polynomialc<degin> &poly) const
         {
-            Polynomial<Internal::max<degin,deg>::value> p;
+            Polynomialc<Internal::max<degin,deg>::value> p;
             p.coefficients().tail(degin+1) = poly.coefficients();
             p.coefficients().tail(deg+1) += coef;
             return p;
         }
         
         template<int degin>
-        Polynomial<Internal::max<degin,deg>::value> operator-(const Polynomial<degin> &poly) const
+        Polynomialc<Internal::max<degin,deg>::value> operator-(const Polynomialc<degin> &poly) const
         {
-            Polynomial<Internal::max<degin,deg>::value> p;
+            Polynomialc<Internal::max<degin,deg>::value> p;
             p.coefficients().tail(deg+1) = coef;
             p.coefficients().tail(degin+1) -= poly.coefficients();
             return p;
         }
         
         template<int degin>
-        Polynomial<degin+deg> operator*(const Polynomial<degin> &poly) const
+        Polynomialc<degin+deg> operator*(const Polynomialc<degin> &poly) const
         {
-            Polynomial<degin+deg> p;
+            Polynomialc<degin+deg> p;
             Internal::PolyConv<deg,degin>::compute(p.coefficients(),coef,poly.coefficients());
             return p;
         }
         
-        Polynomial<deg> operator*(const double c) const
+        Polynomialc<deg> operator*(const double c) const
         {
-            return Polynomial<deg>(coef*c);
+            return Polynomialc<deg>(coef*c);
         }
         
         double eval(double x) const
@@ -144,23 +144,23 @@ namespace polynomial
     };
     
     template <>
-    class Polynomial<Eigen::Dynamic>
+    class Polynomialc<Eigen::Dynamic>
     {
         Eigen::VectorXd coef;
     public:
-        Polynomial(const int deg)
+        Polynomialc(const int deg)
         : coef( Eigen::VectorXd::Zero(deg+1) )
         {
             
         }
         
-        Polynomial( const Eigen::VectorXd &coefin)
+        Polynomialc( const Eigen::VectorXd &coefin)
         : coef( coefin )
         {
 
         }
         
-        Polynomial(const Polynomial<Eigen::Dynamic> &polyin)
+        Polynomialc(const Polynomialc<Eigen::Dynamic> &polyin)
         : coef( polyin.coef )
         {
 
@@ -176,38 +176,38 @@ namespace polynomial
             return coef;
         }
         
-        Polynomial<Eigen::Dynamic> operator+(const Polynomial<Eigen::Dynamic> &poly) const
+        Polynomialc<Eigen::Dynamic> operator+(const Polynomialc<Eigen::Dynamic> &poly) const
         {
             int deg = coef.rows()-1;
             int degin = poly.coef.rows()-1;
-            Polynomial<Eigen::Dynamic> p( std::max(deg,degin) );
+            Polynomialc<Eigen::Dynamic> p( std::max(deg,degin) );
             p.coef.tail(degin+1) = poly.coef;
             p.coef.tail(deg+1) += coef;
             return p;
         }
 
-        Polynomial<Eigen::Dynamic> operator-(const Polynomial<Eigen::Dynamic> &poly) const
+        Polynomialc<Eigen::Dynamic> operator-(const Polynomialc<Eigen::Dynamic> &poly) const
         {
             int deg = coef.rows()-1;
             int degin = poly.coef.rows()-1;
-            Polynomial<Eigen::Dynamic> p( std::max(deg,degin) );
+            Polynomialc<Eigen::Dynamic> p( std::max(deg,degin) );
             p.coef.tail(deg+1) = coef;
             p.coef.tail(degin+1) -= poly.coef;
             return p;
         }
         
-        Polynomial<Eigen::Dynamic> operator*(const Polynomial<Eigen::Dynamic> &poly) const
+        Polynomialc<Eigen::Dynamic> operator*(const Polynomialc<Eigen::Dynamic> &poly) const
         {
             int deg = coef.rows()-1;
             int degin = poly.coef.rows()-1;
-            Polynomial<Eigen::Dynamic> p( deg+degin );
+            Polynomialc<Eigen::Dynamic> p( deg+degin );
             Internal::PolyConv<Eigen::Dynamic,Eigen::Dynamic>::compute(p.coef,coef,poly.coef);
             return p;
         }
         
-        Polynomial<Eigen::Dynamic> operator*(const double c) const
+        Polynomialc<Eigen::Dynamic> operator*(const double c) const
         {
-            return Polynomial<Eigen::Dynamic>(coef*c);
+            return Polynomialc<Eigen::Dynamic>(coef*c);
         }
         
         double eval(double x) const
@@ -249,7 +249,7 @@ namespace polynomial
         }
     };
     
-} // end namespace Polynomial
+} // end namespace Polynomialc
 
 #endif
 
