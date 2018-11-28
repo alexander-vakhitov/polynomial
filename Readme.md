@@ -1,35 +1,34 @@
-Polynomial
+Polynomialc
 ==========
 
-Polynomial is a heavily templated C++ class for polynomials.  It provides functionality for polynomial algebra (addition, subtraction, and multiplication) as well as root-finding using either the numerically-accurate companion matrix method or the much faster Sturm sequences method.  It supports both statically-sized and dynamically-sized polynomials.
+Polynomialc is a heavily templated C++ class for polynomials.  It provides functionality for polynomial algebra (addition, subtraction, and multiplication) as well as root-finding using either the numerically-accurate companion matrix method or the much faster Sturm sequences method.  It supports both statically-sized and dynamically-sized polynomials.
 
-Wherever possible, Polynomial avoids for loops and instead uses template patterns for statically sized vectors to maximize speed.
+Wherever possible, Polynomialc avoids for loops and instead uses template patterns for statically sized vectors to maximize speed.
 
 Dependencies
 ------------
 
-Polynomial depends on the [Eigen](http://eigen.tuxfamily.org/) linear algebra package.
+Polynomialc depends on the [Eigen](http://eigen.tuxfamily.org/) linear algebra package.
 
 Install
 -------
 
-Polynomial is a pure template library so no compilation is needed.  However, a CMake file is provided for installing the headers and compiling the test program.
+Polynomialc is a pure template library so no compilation is needed.  However, a CMake file is provided for installing the headers and compiling the test program.
 
 Usage Example
 -------------
 
-    #include <Polynomial/Polynomial.hpp>
-    using polynomial::Polynomial;
+    #include <Polynomialc/Polynomialc.hpp>
 
     Eigen::Matrix<double,6,1> acoeffs;
     acoeffs << 1,2,3,4,5,6;
-    Polynomial<5> a( acoeffs );
+    Polynomialc<5> a( acoeffs );
     
     Eigen::Matrix<double,5,1> bcoeffs;
     bcoeffs << 1,2,3,4,5;
-    Polynomial<4> b( bcoeffs );
+    Polynomialc<4> b( bcoeffs );
 
-    Polynomial<9> c = a*b;
+    Polynomialc<9> c = a*b;
     std::vector<double> roots = c.realRoots();
 
 Todo

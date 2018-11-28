@@ -15,6 +15,6 @@ include_directories( ${EIGEN3_INCLUDE_DIR} )
 
 include_directories( $(Polynomial) )
 
-add_executable( testpolynomial Polynomial/Polynomial.hpp Polynomial/PolynomialInternal.hpp testpolynomial.cpp )
+add_executable( testpolynomial Polynomial/Polynomialc.hpp Polynomial/PolynomialInternal.hpp testpolynomial.cpp )
 
 install( DIRECTORY Polynomial/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/Polynomial )

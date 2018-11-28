@@ -18,7 +18,7 @@
 #include <vector>
 #include <queue>
 
-namespace polynomial
+namespace Polynomial
 {
     namespace Internal
     {
@@ -200,7 +200,7 @@ namespace polynomial
                 double b = upper;
                 double c = 0.5*(a+b);
                 
-                for ( int i = 0; i < 100; i++ )
+                for ( int i = 0; i < 24; i++ )
                 {
                     const double fc = PolyVal<Eigen::Dynamic>::compute(coef,c);
                     const char fcpos = (fc>0);
@@ -587,6 +587,6 @@ namespace polynomial
 
     } // end namespace Internal
     
-} // end namespace Polynomial
+} // end namespace Polynomialc
 
 #endif

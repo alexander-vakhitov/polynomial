@@ -1,20 +1,20 @@
 #include <iostream>
 #include <vector>
 
-#include <Polynomial/Polynomial.hpp>
+#include "Polynomial/Polynomialc.hpp"
 
-using polynomial::Polynomial;
+using Polynomial::Polynomialc;
 
 int main( int argc, char **argv )
 {
     Eigen::Matrix<double,6,1> acoeffs;
     acoeffs << 1,2,3,4,5,6;
-    Polynomial<5> a( acoeffs );
+    Polynomialc<5> a( acoeffs );
     Eigen::Matrix<double,5,1> bcoeffs;
     bcoeffs << 1,2,3,4,5;
-    Polynomial<4> b( bcoeffs );
+    Polynomialc<4> b( bcoeffs );
 
-    std::cout << "*** Polynomial algebra test ***\n";
+    std::cout << "*** Polynomialc algebra test ***\n";
     
     std::cout << "a: [" << a.coefficients().transpose() << "]\n";
     std::cout << "b: [" << b.coefficients().transpose() << "]\n";
@@ -32,10 +32,10 @@ int main( int argc, char **argv )
 
     Eigen::VectorXd adcoeffs(6);
     adcoeffs << 1,2,3,4,5,6;
-    Polynomial<Eigen::Dynamic> ad( adcoeffs );
+    Polynomialc<Eigen::Dynamic> ad( adcoeffs );
     Eigen::VectorXd bdcoeffs(5);
     bdcoeffs << 1,2,3,4,5;
-    Polynomial<Eigen::Dynamic> bd( bdcoeffs );
+    Polynomialc<Eigen::Dynamic> bd( bdcoeffs );
     
     std::cout << "a: [" << ad.coefficients().transpose() << "]\n";
     std::cout << "b: [" << bd.coefficients().transpose() << "]\n";
@@ -49,11 +49,11 @@ int main( int argc, char **argv )
     
     std::cout << "\n";
     
-    std::cout << "*** Polynomial roots test ***\n";
+    std::cout << "*** Polynomialc roots test ***\n";
     
     Eigen::Matrix<double,5,1> ccoeffs;
     ccoeffs <<    -0.8049,    -0.4430,    0.0938,    0.9150,    0.9298;
-    Polynomial<4> c(ccoeffs);
+    Polynomialc<4> c(ccoeffs);
     
     std::cout << "c: [" << c.coefficients().transpose() << "]\n";
     
@@ -77,7 +77,7 @@ int main( int argc, char **argv )
     
     Eigen::VectorXd cdcoeffs(5);
     cdcoeffs <<    -0.8049,    -0.4430,    0.0938,    0.9150,    0.9298;
-    Polynomial<Eigen::Dynamic> cd(ccoeffs);
+    Polynomialc<Eigen::Dynamic> cd(ccoeffs);
     
     std::cout << "c: [" << cd.coefficients().transpose() << "]\n";
     
